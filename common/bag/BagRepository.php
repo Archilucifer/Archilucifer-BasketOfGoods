@@ -2,7 +2,7 @@
 
 namespace app\common\bag;
 
-use app\common\good\Good;
+use app\domain\good\interfaces\Good;
 use app\domain\bag\interfaces\Bag;
 use Yii;
 use app\domain\bag\interfaces\BagRepository as BagRepositoryInterface;

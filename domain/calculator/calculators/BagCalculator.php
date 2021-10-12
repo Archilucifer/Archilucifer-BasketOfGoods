@@ -2,28 +2,27 @@
 
 namespace app\domain\calculator\calculators;
 
-use app\domain\bag\Bag;
-use app\domain\calculator\GoodCalculatorBuilder;
-use app\domain\calculator\GoodCalculatorFactory;
-use app\domain\calculator\interfaces\Calculable;
-use app\domain\calculator\interfaces\GoodCalculatorBuilder as GoodCalculatorBuilderInterface;
-use app\domain\calculator\interfaces\GoodCalculatorFactory as GoodCalculatorFactoryInterface;
+use app\domain\bag\interfaces\Bag;
+use app\domain\calculator\interfaces\CalculationProcess;
+use app\domain\calculator\interfaces\GoodCalculatorBuilder;
+use app\domain\calculator\interfaces\GoodCalculatorFactory;
 
 class BagCalculator
 {
     public array $calculatedGoods = [];
     public string $totalAmount = '0';
 
-    private GoodCalculatorFactoryInterface $goodCalculatorFactory;
-    private GoodCalculatorBuilderInterface $goodCalculatorBuilder;
+    private GoodCalculatorFactory $goodCalculatorFactory;
+    private GoodCalculatorBuilder $goodCalculatorBuilder;
 
     /**
-     * @todo вынести все зависимости в котейнер
+     * @param GoodCalculatorBuilder $goodCalculatorBuilder
+     * @param GoodCalculatorFactory $goodCalculatorFactory
      */
-    public function __construct()
+    public function __construct(GoodCalculatorBuilder $goodCalculatorBuilder, GoodCalculatorFactory $goodCalculatorFactory)
     {
-        $this->goodCalculatorFactory = new GoodCalculatorFactory();
-        $this->goodCalculatorBuilder = new GoodCalculatorBuilder();
+        $this->goodCalculatorFactory = $goodCalculatorFactory;
+        $this->goodCalculatorBuilder = $goodCalculatorBuilder;
     }
 
     /**
@@ -34,7 +33,7 @@ class BagCalculator
     {
         $this->calculateGoods($bag->getGoods(), $bag->goodsCount);
         foreach ($this->calculatedGoods as $calculatedGood) {
-            $this->totalAmount = bcadd($calculatedGood->price, $this->totalAmount, Calculable::BC_SCALE);
+            $this->totalAmount = bcadd($calculatedGood->price, $this->totalAmount, CalculationProcess::BC_SCALE);
         }
 
         return $this;

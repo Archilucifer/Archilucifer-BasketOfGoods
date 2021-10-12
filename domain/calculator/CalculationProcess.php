@@ -2,22 +2,24 @@
 
 namespace app\domain\calculator;
 
-use app\domain\bag\Bag;
+use app\domain\bag\interfaces\Bag;
+use app\domain\bag\interfaces\BagRepository;
 use app\domain\calculator\calculators\BagCalculator;
-use app\common\bag\BagRepository;
-use app\domain\bag\interfaces\BagRepository as BagRepositoryInterface;
+use app\domain\calculator\interfaces\CalculationProcess as CalculationProcessInterface;
 
-class CalculationProcess
+
+class CalculationProcess implements CalculationProcessInterface
 {
-
     private BagCalculator $bagCalculator;
-    private BagRepositoryInterface $bagRepository;
+    private BagRepository $bagRepository;
 
-    /* @todo вынести все зависимости в котейнер */
-    public function __construct()
+    /* @param BagCalculator $bagCalculator
+     * @param BagRepository $bagRepository
+     */
+    public function __construct(BagCalculator $bagCalculator, BagRepository $bagRepository)
     {
-      $this->bagCalculator = new BagCalculator();
-      $this->bagRepository = new BagRepository();
+      $this->bagCalculator = $bagCalculator;
+      $this->bagRepository = $bagRepository;
     }
 
     /**
