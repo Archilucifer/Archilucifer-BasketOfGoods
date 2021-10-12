@@ -1,6 +1,6 @@
 <?php
 
-namespace app\domain\bag;
+namespace app\common\bag;
 
 use app\common\good\Good;
 use app\domain\bag\interfaces\Bag;
