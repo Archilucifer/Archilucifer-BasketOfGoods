@@ -1,0 +1,31 @@
+.line-dashed {
+    background-color: transparent;
+    border-bottom: 1px dashed #dee5e7 !important;
+}
+.line {
+    width: 100%;
+    height: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.padding-v-md {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: row;
+}
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vertical-align > [class^="col-"] > div,
+.vertical-align > [class*=" col-"] > div {
+    flex-grow: 1;
+}
