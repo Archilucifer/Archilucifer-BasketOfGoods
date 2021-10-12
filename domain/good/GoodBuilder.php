@@ -17,6 +17,6 @@ class GoodBuilder implements GoodBuilderInterface
         $good->setId($id);
         $good->setBrand($params['brand']);
         $good->setSpecifications($params['specifications']);
-        $good->setCalculationType(\app\common\good\Good::getCalculationTypeById($id));
+        $good->setCalculationType(Good::getCalculationTypeById($id));
     }
 }

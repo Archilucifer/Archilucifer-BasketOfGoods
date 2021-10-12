@@ -2,7 +2,8 @@
 
 namespace app\domain\bag\interfaces;
 
-use app\common\good\Good;
+
+use app\domain\good\interfaces\Good;
 
 interface BagRepository
 {

@@ -3,9 +3,11 @@
 namespace app\controllers;
 
 use app\commands\GoodAdding;
-use app\common\bag\BagRepository;
-use app\domain\calculator\CalculationProcess;
+use app\domain\bag\interfaces\BagRepository;
+use app\domain\calculator\interfaces\CalculationProcess;
+use yii\base\InvalidConfigException;
 use yii\data\ArrayDataProvider;
+use yii\di\NotInstantiableException;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -13,10 +15,12 @@ class BagController extends Controller
 {
     /**
      * @return string
+     * @throws InvalidConfigException
+     * @throws NotInstantiableException
      */
     public function actionIndex(): string
     {
-        $bagRepository = new BagRepository();
+        $bagRepository = \Yii::$container->get(BagRepository::class);
 
         $options = $this->createRenderOptions($bagRepository);
         return $this->render('index', [
@@ -28,6 +32,8 @@ class BagController extends Controller
 
     /**
      * @return Response
+     * @throws InvalidConfigException
+     * @throws NotInstantiableException
      */
     public function actionAddGood(): Response
     {
@@ -40,13 +46,15 @@ class BagController extends Controller
     /**
      * @param string $id
      * @return Response
+     * @throws InvalidConfigException
+     * @throws NotInstantiableException
      */
     public function actionDeleteGood(string $id): Response
     {
-        $bagRepository = new BagRepository();
+        $bagRepository = \Yii::$container->get(BagRepository::class);
         $bagRepository->removeGoodById($id);
 
-        (new CalculationProcess())->calculate($bagRepository->getBagModel());
+        \Yii::$container->get(CalculationProcess::class)->calculate($bagRepository->getBagModel());
 
         return $this->redirect(['index']);
     }

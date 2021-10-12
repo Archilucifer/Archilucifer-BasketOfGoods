@@ -2,13 +2,14 @@
 
 namespace app\domain\calculator\interfaces;
 
-use app\domain\good\interfaces\Good as GoodInterface;
+use app\domain\calculator\interfaces\GoodCalculator;
+use app\domain\good\interfaces\Good;
 
 interface GoodCalculatorFactory
 {
     /**
-     * @param GoodInterface $good
+     * @param Good $good
      * @return GoodCalculator
      */
-    public function create(GoodInterface $good): GoodCalculator;
+    public function create(Good $good): GoodCalculator;
 }

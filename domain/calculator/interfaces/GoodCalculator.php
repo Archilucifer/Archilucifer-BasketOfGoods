@@ -2,7 +2,7 @@
 
 namespace app\domain\calculator\interfaces;
 
-interface GoodCalculator extends Calculable
+interface GoodCalculator
 {
     public function calculate(): void;
 }
