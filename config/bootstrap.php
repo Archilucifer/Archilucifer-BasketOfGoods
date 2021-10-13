@@ -9,17 +9,22 @@ Yii::setAlias('@domain', dirname(__DIR__) . '/domain');
 
 Yii::$container->set(
     \app\domain\good\interfaces\Good::class,
-    \app\common\good\Good::class
+    \app\domain\good\Good::class
 );
 
 Yii::$container->set(
     \app\domain\good\interfaces\GoodFactory::class,
-    \app\domain\good\GoodFactory::class
+    \app\domain\good\GoodPrototype::class
 );
 
 Yii::$container->set(
     \app\domain\good\interfaces\GoodBuilder::class,
     \app\domain\good\GoodBuilder::class
+);
+
+Yii::$container->set(
+    \app\domain\good\interfaces\GoodRepository::class,
+        \app\common\good\GoodRepository::class
 );
 
 /**
