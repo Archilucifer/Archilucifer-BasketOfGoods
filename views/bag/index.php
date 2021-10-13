@@ -30,7 +30,7 @@ $this->title = 'Bag';
                                     'delete',
                                     [
                                         '/bag/delete-good',
-                                        'id' => $model->id,
+                                        'id' => $model->getId(),
                                     ],
                                 );
                             }

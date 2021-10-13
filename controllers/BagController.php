@@ -31,14 +31,15 @@ class BagController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      * @throws InvalidConfigException
      * @throws NotInstantiableException
      */
-    public function actionAddGood(): Response
+    public function actionAddGood(int $id): Response
     {
         $command = new GoodAdding();
-        $command->execute(\Yii::$app->getRequest()->queryParams);
+        $command->execute($id);
 
         return $this->redirect(['goods/index']);
     }
