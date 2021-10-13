@@ -3,11 +3,10 @@
 namespace app\commands;
 
 use app\commands\interfaces\Command;
+use app\common\good\GoodRepository;
 use app\domain\bag\interfaces\BagRepository;
 use app\domain\calculator\CalculationProcess;
-use app\common\good\Good;
-use app\domain\good\interfaces\GoodBuilder;
-use app\domain\good\interfaces\GoodFactory;
+use app\domain\good\interfaces\Good;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\di\NotInstantiableException;
@@ -21,13 +20,13 @@ class GoodAdding extends Component implements Command
      */
     public function execute($context): void
     {
-        $good = $this->createGood($context);
+        $goodForBag = $this->createGood($context);
         $bagRepository = \Yii::$container->get(BagRepository::class);
 
-        $goodId = $good->getId();
+        $goodId = $goodForBag->getId();
         $bagRepository->checkGoodAddedToBagById($goodId)
             ? $bagRepository->addGoodCountById($goodId)
-            : $bagRepository->addGood($good);
+            : $bagRepository->addGood($goodForBag);
 
 //        print_r($bagRepository->getBagModel()->getGoods()); exit;
         /*@todo вынести получение объектов в фабрику, зависимости в контейнер*/
@@ -36,16 +35,13 @@ class GoodAdding extends Component implements Command
     }
 
     /**
-     * @param array $params
+     * @param int $id
      * @return Good
-     * @throws InvalidConfigException
-     * @throws NotInstantiableException
      */
-    private function createGood(array $params): Good
+    private function createGood(int $id): Good
     {
-        $good = \Yii::$container->get(GoodFactory::class)->create();
-        \Yii::$container->get(GoodBuilder::class)->build($good, $params);
-        return $good;
+        $good = GoodRepository::getById($id);
+        return $good->getPrototype();
     }
 
 }

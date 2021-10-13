@@ -7,43 +7,33 @@ interface Good
     public const BASIC_GOOD_CALCULATION = 'basic-good-calculation';
 
     /**
-     * @param string $id
+     * @param int $id
      */
-    public function setId(string $id): void;
-
-    public function getId(): string;
+    public function setId(int $id): void;
+    public function getId(): int;
 
     /**
      * @param string $price
      */
     public function setPrice(string $price): void;
+    public function getPrice(): string;
 
     /**
      * @param string $brand
      */
     public function setBrand(string $brand): void;
+    public function getBrand(): string;
 
     /**
      * @param array $specifications
      */
     public function setSpecifications(array $specifications): void;
+    public function getSpecifications(): array;
 
-    public function getCalculationType(): string;
 
     /**
      * @param string $calculationType
      */
     public function setCalculationType(string $calculationType): void;
-
-    /**
-     * @param int $id
-     * @return string
-     */
-    public static function getPriceById(int $id): string;
-
-    /**
-     * @param int $id
-     * @return string
-     */
-    public static function getCalculationTypeById(int $id): string;
+    public function getCalculationType(): string;
 }
