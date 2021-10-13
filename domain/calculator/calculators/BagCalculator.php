@@ -31,21 +31,23 @@ class BagCalculator
      */
     public function calculate(Bag $bag): BagCalculator
     {
-        $this->calculateGoods($bag->getGoods(), $bag->goodsCount);
+        $this->calculateGoods($bag->getGoods(), $bag->getGoodsCount());
+
         foreach ($this->calculatedGoods as $calculatedGood) {
             $this->totalAmount = bcadd($calculatedGood->price, $this->totalAmount, CalculationProcess::BC_SCALE);
+
         }
 
         return $this;
     }
 
     /**
-     * @param array $originalGood
+     * @param array $originalGoods
      * @param array $goodsCount
      */
-    private function calculateGoods(array $originalGood, array $goodsCount): void
+    private function calculateGoods(array $originalGoods, array $goodsCount): void
     {
-        foreach ($originalGood as $good) {
+        foreach ($originalGoods as $good) {
             $goodToCalculate = $this->goodCalculatorFactory->create($good);
             $this->goodCalculatorBuilder->build($good, $goodToCalculate, $goodsCount[$good->getId()]['count']);
             $goodToCalculate->calculate();
