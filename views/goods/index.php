@@ -24,9 +24,6 @@ $this->title = 'Goods';
                         [
                             'bag/add-good',
                             'id' => 1,
-                            'brand' => 'Samsung',
-                            'price' => '40000.30',
-                            'specifications' => ['Diagonal' => 50]
                         ],
                         [
                             'brand' => 'noticesBtn',
@@ -47,9 +44,6 @@ $this->title = 'Goods';
                         [
                             'bag/add-good',
                             'id' => 2,
-                            'brand' => 'Apple',
-                            'price' => '98000',
-                            'specifications' => ['Diagonal' => 12, 'Memory' => '128gb']
                         ],
                         [
                             'id' => 'noticesBtn',
@@ -70,9 +64,6 @@ $this->title = 'Goods';
                         [
                             'bag/add-good',
                             'id' => 3,
-                            'brand' => 'Tefal',
-                            'price' => '4350',
-                            'specifications' => ['Diameter' => 6]
                         ],
                         [
                             'id' => 'noticesBtn',
